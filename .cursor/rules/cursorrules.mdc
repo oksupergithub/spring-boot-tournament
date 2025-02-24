@@ -1,0 +1,61 @@
+---
+description: 
+globs: 
+---
+Plateforme de Gestion de Tournois E-Sport
+
+
+# Contexte
+Une communauté de gamers souhaite disposer d'une plateforme permettant d'organiser et 
+de gérer des tournois e-sport multi-jeux. 
+La plateforme doit supporter différents formats de tournois et permettre aux joueurs de suivre leur progression.
+
+# Besoins Fonctionnels
+- Gestion des Jeux
+- Enregistrement des jeux supportés par la plateforme
+Chaque jeu possède des caractéristiques spécifiques :
+Format de match (1v1, 2v2, 5v5...)
+Durée moyenne d'un match
+Modes de jeu disponibles
+Score minimum pour gagner
+
+# Gestion des Joueurs
+- Inscription des joueurs sur la plateforme
+- Profil joueur comprenant :
+Informations personnelles (pseudo, email, date inscription)
+Historique des tournois
+Statistiques par jeu (victoires, défaites, ratio)
+Classement ELO par jeu
+- Possibilité de former des équipes
+
+# Gestion des Tournois
+- Création de tournois avec différents formats :
+Simple élimination
+Double élimination
+Round Robin (championnat)
+- Configuration des tournois :
+Jeu et mode de jeu
+Nombre de participants/équipes
+Format des matchs (BO1, BO3, BO5)
+Prix et récompenses
+Dates d'inscription et de déroulement
+- Gestion du bracket (arbre du tournoi)
+- Saisie et validation des résultats
+- Mise à jour automatique du bracket
+- Calcul et attribution des points ELO
+
+# Gestion des Matchs
+- Génération automatique des matchs selon le format du tournoi
+- Programmation horaire des matchs
+- Saisie des scores
+- Validation des résultats
+- Gestion des litiges
+
+# Administration
+- Gestion des droits d'accès selon les rôles :
+Administrateur système
+Organisateur de tournoi
+Arbitre
+Joueur
+- Modération des tournois
+- Gestion des sanctions (avertissements, bans)
