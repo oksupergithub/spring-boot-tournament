@@ -43,6 +43,10 @@ public class Match implements Serializable{
   @JoinColumn(name = "tournament_id")
   private Tournament tournament;
 
+  @ManyToOne
+  @JoinColumn(name = "team_id")
+  private Team team;
+
   @OneToOne
   @JoinColumn(name = "match_id")
   private Score score;

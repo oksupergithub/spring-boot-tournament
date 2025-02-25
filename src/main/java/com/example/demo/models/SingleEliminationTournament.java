@@ -8,3 +8,4 @@ import jakarta.persistence.Entity;
 public class SingleEliminationTournament extends Tournament implements Serializable{
    private Boolean hasThirdPlaceMatch;
 }
+

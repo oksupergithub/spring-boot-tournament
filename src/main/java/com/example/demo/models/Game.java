@@ -33,7 +33,7 @@ public class Game implements Serializable {
   private GameFormat format;
   private String averageMatchDuration;
 
-  @OneToMany
+  @OneToMany(mappedBy = "game")
   private List<GameMode> gameModes;
 
   @OneToMany

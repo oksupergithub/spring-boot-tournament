@@ -1,5 +1,8 @@
 package com.example.demo.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +27,18 @@ public class PlayerController {
         player.setPassword(passwordEncoder.encode(player.getPassword()));
         playerRepository.save(player);
         return ResponseEntity.ok(player);
+    }
+
+    @PostMapping("/players/createList")
+    public ResponseEntity<List<Player>> createPlayers(@RequestBody List<Player> players) {
+        List<Player> savedPlayers = new ArrayList<>();
+        
+        for (Player player : players) {
+            player.setPassword(passwordEncoder.encode(player.getPassword()));
+            savedPlayers.add(playerRepository.save(player));
+        }
+        
+        return ResponseEntity.ok(savedPlayers);
     }
 
 }

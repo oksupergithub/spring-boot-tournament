@@ -1,12 +1,11 @@
 package com.example.demo.models;
 
-import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -16,12 +15,15 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
 @Table(name = "players")
 @DiscriminatorValue("PLAYER")
 @Data
-@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"teams", "matches", "tournaments"})
+@EqualsAndHashCode(exclude = {"teams", "matches", "tournaments"}, callSuper = true)
+@JsonIgnoreProperties(value = {"teams"})
 public class Player extends User {
     
     @Column(nullable = false)
@@ -48,6 +50,14 @@ public class Player extends User {
     @ManyToMany
     private Set<Tournament> tournaments;
 
+    @JsonBackReference
+    @ManyToMany
+    @JoinTable(
+        name = "player_teams",
+        joinColumns = @JoinColumn(name = "player_id"),
+        inverseJoinColumns = @JoinColumn(name = "team_id")
+    )
+    private Set<Team> teams;
 
 
 // @OneToMany
