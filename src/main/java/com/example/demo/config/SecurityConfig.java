@@ -46,7 +46,12 @@ public class SecurityConfig {
             // Configure les règles d'autorisation des requêtes
             .authorizeHttpRequests(auth -> auth
                 // Routes publiques : login et création de compte
-                .requestMatchers("/api/login", "/players/create","/players/createList").permitAll()
+                .requestMatchers("/api/login",
+                 "/players/create",
+                 "/players/createList",
+                 "/swagger-ui.html",
+                 "/swagger-ui/**",
+                 "api-docs").permitAll()
                 // Toutes les autres routes nécessitent une authentification
                 .anyRequest().authenticated()
             )
