@@ -2,20 +2,25 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven 3.9' // On va configurer ce Maven dans Jenkins ensuite
+        maven 'Maven 3.9'
+    }
+
+    environment {
+        IMAGE_NAME = 'springboot-tournament' // Nom de l’image Docker
     }
 
     stages {
-
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                sh './mvnw clean package -DskipTests'
             }
         }
 
-        stage('Test') {
+        stage('Docker Build') {
             steps {
-                sh 'mvn test'
+                script {
+                    sh "docker build -t $IMAGE_NAME ."
+                }
             }
         }
     }
