@@ -33,6 +33,7 @@
         public JwtAuthFilter(String jwtSecret) {
             this.jwtSecret = jwtSecret;
         }
+        
 
         /**
          * Méthode principale du filtre qui traite chaque requête

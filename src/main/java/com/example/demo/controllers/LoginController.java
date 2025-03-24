@@ -37,13 +37,11 @@ public class LoginController {
             userService.authenticate(userDTO.getUsername(), userDTO.getPassword());
             
             String token = Jwts.builder()
-                .claims()
-                    .subject(userDTO.getUsername())
-                    .issuedAt(Date.from(Instant.now()))
-                    .expiration(Date.from(Instant.now().plus(1, ChronoUnit.HOURS)))
-                    .and()
-                .signWith(getSigningKey())
-                .compact();
+            .subject(userDTO.getUsername())
+            .issuedAt(Date.from(Instant.now()))
+            .expiration(Date.from(Instant.now().plus(1, ChronoUnit.HOURS)))
+            .signWith(getSigningKey())
+            .compact();
                 
             return ResponseEntity.ok(token);
         } catch (RuntimeException e) {
