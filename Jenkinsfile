@@ -10,11 +10,17 @@ pipeline {
     }
 
     stages {
+        stage('Check Docker Version') {
+            steps {
+                sh 'docker --version'
+            }
+        }
         stage('Build') {
             steps {
                 sh './mvnw clean package -DskipTests'
             }
         }
+        
 
         stage('Docker Build') {
             steps {
