@@ -33,6 +33,11 @@ pipeline {
                 '''
             }
         }
+        stage('Docker Test') {
+            steps {
+                sh 'whoami && docker info && docker ps -a'
+            }
+        }
         stage('Liste containers') {
             steps {
                 sh 'docker ps -a'
