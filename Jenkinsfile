@@ -6,11 +6,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/oksupergithub/spring-boot-tournament.git'
-            }
-        }
 
         stage('Build') {
             steps {
