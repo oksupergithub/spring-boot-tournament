@@ -6,27 +6,31 @@ pipeline {
     }
 
     environment {
-        IMAGE_NAME = 'springboot-tournament' // Nom de l’image Docker
+        IMAGE_NAME = 'springboot-tournament'
+        CONTAINER_NAME = 'springboot-tournament-container'
     }
 
     stages {
-        stage('Check Docker Version') {
-            steps {
-                sh 'docker --version'
-            }
-        }
-        stage('Build') {
+        stage('Build App') {
             steps {
                 sh './mvnw clean package -DskipTests'
             }
         }
-        
 
-        stage('Docker Build') {
+        stage('Build Docker Image') {
             steps {
-                script {
-                    sh "docker build -t $IMAGE_NAME ."
-                }
+                sh 'docker build -t $IMAGE_NAME .'
+            }
+        }
+
+        stage('Run Docker Container') {
+            steps {
+                // Stop container s’il existe déjà
+                sh '''
+                    docker stop $CONTAINER_NAME || true
+                    docker rm $CONTAINER_NAME || true
+                    docker run -d --name $CONTAINER_NAME -p 8080:8080 $IMAGE_NAME
+                '''
             }
         }
     }
