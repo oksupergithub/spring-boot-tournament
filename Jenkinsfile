@@ -33,5 +33,10 @@ pipeline {
                 '''
             }
         }
+        stage('Liste containers') {
+            steps {
+                sh 'docker ps -a'
+            }
+        }
     }
 }
