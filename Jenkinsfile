@@ -11,11 +11,24 @@ pipeline {
     }
 
     stages {
+        stage('Vérification Docker') {
+            steps {
+                sh '''
+                echo "--- Utilisateur courant ---"
+                whoami
+                echo "--- Version de Docker ---"
+                docker --version
+                echo "--- Liste des containers ---"
+                docker ps -a
+                '''
+            }
+        }
         stage('Build App') {
             steps {
                 sh './mvnw clean package -DskipTests'
             }
         }
+
 
         stage('Build Docker Image') {
             steps {
