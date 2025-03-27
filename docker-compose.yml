@@ -1,0 +1,31 @@
+services:
+
+  db:
+    image: postgres:14
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: samuel
+      POSTGRES_PASSWORD: 0312
+      POSTGRES_DB: tournament_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  app:
+  
+    build:
+      context: ./springboot_tournament
+    container_name: springboot-app
+    ports:
+      - "8082:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/tournament_db
+      SPRING_DATASOURCE_USERNAME: samuel
+      SPRING_DATASOURCE_PASSWORD: 0312
+    depends_on:
+      - db
+
+volumes:
+
+  postgres_data:
